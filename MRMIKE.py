@@ -286,6 +286,7 @@ def loop():
                     mikeY += 10
                     up += 1
                 if event.key == pygame.K_DOWN:
+                    mikeY += -10
                     down += 1
                 if event.key == pygame.K_LEFT:
                     left += 1
