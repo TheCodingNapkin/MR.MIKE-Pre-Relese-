@@ -36,6 +36,8 @@ bright_green = (0,255,0)
 dark_grey = (200,200,200)
 grey = (215,215,215)
 bright_grey = (225,225,225)
+blue = (25,50,255)
+bright_blue = (100,150,255)
 first = True
 
 class Mr:
@@ -89,7 +91,8 @@ def imgButton(msg,x,y,w,h,ic,ac,func,params,action=None,paramsSecond=None):
                 action(params4,params5)
             else:
                 action()
-            main()
+            pygame.draw.rect(gameDisplay, green,(x,y,w,h))
+            # main()
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
     smallText = pygame.font.Font("Raleway-Medium.ttf",45)
@@ -205,6 +208,28 @@ def playerSelect():
         pygame.display.update()
         clock.tick(30)
 
+##def main():
+##    time.sleep(.2)
+##    while True:
+##        gameDisplay.fill(white)
+##        for event in pygame.event.get():
+##            if event.type == pygame.QUIT:
+##                pygame.quit()
+##                quit()
+##
+####        button("Start!",275,450,300,100,green,bright_green,readyPlayerOne)
+####        button("Quit",725,450,300,100,red,bright_red,quitgame)
+####        button("Select Player",275,575,300,100,gold,yellow,playerSelect)
+####        button("Credits",725,575,300,100,dark_grey,grey)
+##        button("Select Player",275,450,300,100,gold,yellow,playerSelect)
+##        button("Credits",725,450,300,100,dark_grey,grey,Credits)
+##        button("Start!",275,575,300,100,green,bright_green,loop)
+##        button("Quit",725,575,300,100,red,bright_red,quitgame)
+##        text(cryForHelp, 640, 200)
+##
+##        pygame.display.update()
+##        clock.tick(120)
+
 def main():
     time.sleep(.2)
     while True:
@@ -218,14 +243,16 @@ def main():
 ##        button("Quit",725,450,300,100,red,bright_red,quitgame)
 ##        button("Select Player",275,575,300,100,gold,yellow,playerSelect)
 ##        button("Credits",725,575,300,100,dark_grey,grey)
-        button("Select Player",275,450,300,100,gold,yellow,playerSelect)
-        button("Credits",725,450,300,100,dark_grey,grey,Credits)
-        button("Start!",275,575,300,100,green,bright_green,loop)
+        button("1 Player",275,450,300,100,gold,yellow,singlePlayer)
+        button("2 Players",725,450,300,100,blue,bright_blue,loop)
+        button("Credits",275,575,300,100,dark_grey,grey,Credits)
         button("Quit",725,575,300,100,red,bright_red,quitgame)
         text(cryForHelp, 640, 200)
 
         pygame.display.update()
         clock.tick(120)
+
+
 
 def win():
 ##    def dance(num):
@@ -242,9 +269,62 @@ def win():
     
         pygame.display.update()
         clock.tick(30)
+    
+def singlePlayer():
+    global first
+    first = False
+    nameSize = 25
+    quoteSize = 18
+    while True:
+        gameDisplay.fill(white)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
 
-    
-    
+        # Title
+        text('Select Your Trouble Maker!',650, 60, 90)
+        
+        # Player1
+        imgButton('', 95, 115, 260,310, white, grey, blitImg,
+            ('player1.png', 100, 120), write_file,
+            ('Settings.txt','player1.png'))
+        text('Ibrahim Dabarani:', 220, 460, nameSize)
+        text('"Gimme your lunch money!"', 220, 490, quoteSize)
+        
+        # Player2
+        imgButton('', 375, 115, 260,310, white, grey, blitImg,
+            ('player2.png', 380, 120), write_file,
+            ('Settings.txt','player2.png'))
+        text('Keith Farr:', 500, 460, nameSize)
+        text('"Keith was here"', 500, 490, quoteSize)
+        
+        # Player3
+        imgButton('', 655, 115, 260,310, white, grey, blitImg,
+            ('player3.png', 660, 120), write_file,
+            ('Settings.txt','player3.png'))
+        text('Kaden Chin-Massey:', 780, 460, nameSize)
+        text('"I will take your juice box!"', 780, 490, quoteSize)
+        
+        # Player4
+        imgButton('', 935, 115, 260,310, white, grey, blitImg,
+            ('player4.png', 940, 120), write_file,
+            ('Settings.txt','player4.png'))
+        text('Mohamud Hassan:', 1060, 460, nameSize)
+        text('"Can you gimme my bak-pak."', 1060, 490, quoteSize)
+        
+##        # Mob Boss
+##        button('Mob Boss',275,580,300,100,dark_grey,grey,mobBoss)
+
+        button("Start",275,580,300,100,green,bright_green,loop)
+        button("Back",725,580,300,100,red,bright_red,main)
+        troublemaker = read_file('Settings.txt')
+
+        
+#the banana was orange so I decided to not eat it after all. in the end I gave it to demitri and he threw it at kaden!
+        
+        pygame.display.update()
+        clock.tick(30)
 
 def loop():
     global first
