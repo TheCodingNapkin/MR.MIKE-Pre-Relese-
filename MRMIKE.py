@@ -1,11 +1,10 @@
 import pygame
 import time
 import random
-#import subprocess
+#import subprocess 
 #import os
 
 pygame.init()  
-  
 gameDisplay = pygame.display.set_mode()
 pygame.display.set_caption('Get Over Here Mr.Mike!!!')
 clock = pygame.time.Clock()
@@ -19,9 +18,11 @@ def read_file(filename):
     f.close()
     return line
 
-troublemaker = read_file('Settings.txt') 
-#print(player)
+troublemaker = read_file('Player1.txt')
+print(troublemaker)
+troublemaker2 = read_file('Player2.txt')
 player = pygame.image.load(str(troublemaker))
+#print(player,"Player")
 gameIcon = pygame.image.load('icon1.png')
 pygame.display.set_icon(gameIcon)
 black = (0,0,0)
@@ -42,14 +43,7 @@ first = True
 
 class Mr:
     Mike = "MR.MIKE GET OVER HERE"
-
 cryForHelp = Mr.Mike
-#print(cryForHelp)
-
-##def readyPlayerOne():
-##    # os.system('open '+ "/Users/ian.ault/Desktop/MR.MIKE/TextFile1.sh")
-##    # subprocess.call("/Users/ian.ault/Desktop/MR.MIKE/TextFile1.sh")
-##    pass
 
 def Credits():
     Credit = True
@@ -67,7 +61,6 @@ def Credits():
         TextSurf, TextRect = text_objects(('Ibrahim Dabarani'),largeText)
         TextRect.center = ((640),(280))
         gameDisplay.blit(TextSurf, TextRect)
-
         button("Back",490,500,300,100,red,bright_red,main)
 
         pygame.display.update()
@@ -147,7 +140,6 @@ def mobBoss():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-
         blitImg("MobBoss.png",640,0)
         text("Complete the Campaign to Unlock", 640, 300, 70)
         button("Back",490,500,300,100,red,bright_red,playerSelect)
@@ -166,69 +158,45 @@ def playerSelect():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-
         # Title
         text('Select Your Trouble Maker!',650, 60, 90)
         
         # Player1
         imgButton('', 95, 115, 260,310, white, grey, blitImg,
             ('player1.png', 100, 120), write_file,
-            ('Settings.txt','player1.png'))
+            ('Player1.txt','player1.png'))
         text('Ibrahim Dabarani:', 220, 460, nameSize)
         text('"Gimme your lunch money!"', 220, 490, quoteSize)
         
         # Player2
         imgButton('', 375, 115, 260,310, white, grey, blitImg,
             ('player2.png', 380, 120), write_file,
-            ('Settings.txt','player2.png'))
+            ('Player1.txt','player2.png'))
         text('Keith Farr:', 500, 460, nameSize)
         text('"Keith was here"', 500, 490, quoteSize)
         
         # Player3
         imgButton('', 655, 115, 260,310, white, grey, blitImg,
             ('player3.png', 660, 120), write_file,
-            ('Settings.txt','player3.png'))
+            ('Player1.txt','player3.png'))
         text('Kaden Chin-Massey:', 780, 460, nameSize)
         text('"I will take your juice box!"', 780, 490, quoteSize)
         
         # Player4
         imgButton('', 935, 115, 260,310, white, grey, blitImg,
             ('player4.png', 940, 120), write_file,
-            ('Settings.txt','player4.png'))
+            ('Player1.txt','player4.png'))
         text('Mohamud Hassan:', 1060, 460, nameSize)
         text('"Can you gimme my bak-pak."', 1060, 490, quoteSize)
         
         # Mob Boss
         button('Mob Boss',275,580,300,100,dark_grey,grey,mobBoss)
         button("Back",725,580,300,100,red,bright_red,main)
-        troublemaker = read_file('Settings.txt')
-        
-#the banana was orange so I decided to not eat it after all. in the end I gave it to demitri and he threw it at kaden!
+        troublemaker = read_file('Player1.txt')
+        troublemaker2 = read_file('Player2.txt')
         
         pygame.display.update()
         clock.tick(30)
-
-##def main():
-##    time.sleep(.2)
-##    while True:
-##        gameDisplay.fill(white)
-##        for event in pygame.event.get():
-##            if event.type == pygame.QUIT:
-##                pygame.quit()
-##                quit()
-##
-####        button("Start!",275,450,300,100,green,bright_green,readyPlayerOne)
-####        button("Quit",725,450,300,100,red,bright_red,quitgame)
-####        button("Select Player",275,575,300,100,gold,yellow,playerSelect)
-####        button("Credits",725,575,300,100,dark_grey,grey)
-##        button("Select Player",275,450,300,100,gold,yellow,playerSelect)
-##        button("Credits",725,450,300,100,dark_grey,grey,Credits)
-##        button("Start!",275,575,300,100,green,bright_green,loop)
-##        button("Quit",725,575,300,100,red,bright_red,quitgame)
-##        text(cryForHelp, 640, 200)
-##
-##        pygame.display.update()
-##        clock.tick(120)
 
 def main():
     time.sleep(.2)
@@ -244,7 +212,7 @@ def main():
 ##        button("Select Player",275,575,300,100,gold,yellow,playerSelect)
 ##        button("Credits",725,575,300,100,dark_grey,grey)
         button("1 Player",275,450,300,100,gold,yellow,singlePlayer)
-        button("2 Players",725,450,300,100,blue,bright_blue,loop)
+        button("2 Players",725,450,300,100,blue,bright_blue,dualPlayer)
         button("Credits",275,575,300,100,dark_grey,grey,Credits)
         button("Quit",725,575,300,100,red,bright_red,quitgame)
         text(cryForHelp, 640, 200)
@@ -255,24 +223,85 @@ def main():
 
 
 def win():
-##    def dance(num):
-##        blitImg("dance"+str(num+1)+".jpg",0,0)
     gameDisplay.fill(white)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-        for i in range(16):
+        for i in range(27):
             # time.sleep(.1)
-            blitImg("dance"+str(i+1)+".jpg",0,0)
-
+            blitImg("dance"+str(i+1)+".png",-500,-100)
             pygame.display.update()
             clock.tick(120)
-    
+        for i in range(0,27,-1):
+            # time.sleep(.1)
+            blitImg("dance"+str(i+1)+".png",-500,-100)
+            pygame.display.update()
+            clock.tick(120)
+
+def playerSelect(b1Message='Start',dual=False,sub=''):
+    global first
+    first = False
+    nameSize = 25
+    quoteSize = 18
+    if dual:
+        action = player2select
+    else:
+        action = loop
+    while True:
+        gameDisplay.fill(white)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        # Title
+        text('Select Your Trouble Maker!',650, 60, 90)
+
+        # SubTitle
+        text(sub,650, 70, 30)
         
-    
-def singlePlayer():
+        # Player1
+        imgButton('', 95, 115, 260,310, white, grey, blitImg,
+            ('player1.png', 100, 120), write_file,
+            ('Player1.txt','player1.png'))
+        text('Ibrahim Dabarani:', 220, 460, nameSize)
+        text('"Gimme your lunch money!"', 220, 490, quoteSize)
+        
+        # Player2
+        imgButton('', 375, 115, 260,310, white, grey, blitImg,
+            ('player2.png', 380, 120), write_file,
+            ('Player1.txt','player2.png'))
+        text('Keith Farr:', 500, 460, nameSize)
+        text('"Keith was here"', 500, 490, quoteSize)
+        
+        # Player3
+        imgButton('', 655, 115, 260,310, white, grey, blitImg,
+            ('player3.png', 660, 120), write_file,
+            ('Player1.txt','player3.png'))
+        text('Kaden Chin-Massey:', 780, 460, nameSize)
+        text('"I will take your juice box!"', 780, 490, quoteSize)
+        
+        # Player4
+        imgButton('', 935, 115, 260,310, white, grey, blitImg,
+            ('player4.png', 940, 120), write_file,
+            ('Player1.txt','player4.png'))
+        text('Mohamud Hassan:', 1060, 460, nameSize)
+        text('"Can you gimme my bak-pak."', 1060, 490, quoteSize)
+        
+##        # Mob Boss
+##        button('Mob Boss',275,580,300,100,dark_grey,grey,mobBoss)
+
+        # Buttons
+        button(b1Message,275,580,300,100,green,bright_green,action) #b1
+        button("Back",725,580,300,100,red,bright_red,main)
+        troublemaker = read_file('Player1.txt')
+        
+        pygame.display.update()
+        clock.tick(30)
+
+def player2select(b1Message='Start'):
     global first
     first = False
     nameSize = 25
@@ -290,183 +319,215 @@ def singlePlayer():
         # Player1
         imgButton('', 95, 115, 260,310, white, grey, blitImg,
             ('player1.png', 100, 120), write_file,
-            ('Settings.txt','player1.png'))
+            ('Player2.txt','player1.png'))
         text('Ibrahim Dabarani:', 220, 460, nameSize)
         text('"Gimme your lunch money!"', 220, 490, quoteSize)
         
         # Player2
         imgButton('', 375, 115, 260,310, white, grey, blitImg,
             ('player2.png', 380, 120), write_file,
-            ('Settings.txt','player2.png'))
+            ('Player2.txt','player2.png'))
         text('Keith Farr:', 500, 460, nameSize)
         text('"Keith was here"', 500, 490, quoteSize)
         
         # Player3
         imgButton('', 655, 115, 260,310, white, grey, blitImg,
             ('player3.png', 660, 120), write_file,
-            ('Settings.txt','player3.png'))
+            ('Player2.txt','player3.png'))
         text('Kaden Chin-Massey:', 780, 460, nameSize)
         text('"I will take your juice box!"', 780, 490, quoteSize)
         
         # Player4
         imgButton('', 935, 115, 260,310, white, grey, blitImg,
             ('player4.png', 940, 120), write_file,
-            ('Settings.txt','player4.png'))
+            ('Player2.txt','player4.png'))
         text('Mohamud Hassan:', 1060, 460, nameSize)
         text('"Can you gimme my bak-pak."', 1060, 490, quoteSize)
         
 ##        # Mob Boss
 ##        button('Mob Boss',275,580,300,100,dark_grey,grey,mobBoss)
 
-        button("Start",275,580,300,100,green,bright_green,loop)
+        # Buttons
+        button(b1Message,275,580,300,100,green,bright_green,loop) #b1
         button("Back",725,580,300,100,red,bright_red,main)
-        troublemaker = read_file('Settings.txt')
-
-        
-#the banana was orange so I decided to not eat it after all. in the end I gave it to demitri and he threw it at kaden!
+        troublemaker2 = read_file('Player2.txt')
         
         pygame.display.update()
         clock.tick(30)
+
+def singlePlayer():
+    playerSelect()
 
 def dualPlayer():
-    global first
-    first = False
-    nameSize = 25
-    quoteSize = 18
-    while True:
-        gameDisplay.fill(white)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+    playerSelect("Next",True,"Troublemaker No.1")
 
-        # Title
-        text('Select Your Trouble Maker!',650, 60, 90)
-        
-        # Player1
-        imgButton('', 95, 115, 260,310, white, grey, blitImg,
-            ('player1.png', 100, 120), write_file,
-            ('Settings.txt','player1.png'))
-        text('Ibrahim Dabarani:', 220, 460, nameSize)
-        text('"Gimme your lunch money!"', 220, 490, quoteSize)
-        
-        # Player2
-        imgButton('', 375, 115, 260,310, white, grey, blitImg,
-            ('player2.png', 380, 120), write_file,
-            ('Settings.txt','player2.png'))
-        text('Keith Farr:', 500, 460, nameSize)
-        text('"Keith was here"', 500, 490, quoteSize)
-        
-        # Player3
-        imgButton('', 655, 115, 260,310, white, grey, blitImg,
-            ('player3.png', 660, 120), write_file,
-            ('Settings.txt','player3.png'))
-        text('Kaden Chin-Massey:', 780, 460, nameSize)
-        text('"I will take your juice box!"', 780, 490, quoteSize)
-        
-        # Player4
-        imgButton('', 935, 115, 260,310, white, grey, blitImg,
-            ('player4.png', 940, 120), write_file,
-            ('Settings.txt','player4.png'))
-        text('Mohamud Hassan:', 1060, 460, nameSize)
-        text('"Can you gimme my bak-pak."', 1060, 490, quoteSize)
-        
-##        # Mob Boss
-##        button('Mob Boss',275,580,300,100,dark_grey,grey,mobBoss)
-
-        button("Start",275,580,300,100,green,bright_green,loop)
-        button("Back",725,580,300,100,red,bright_red,main)
-        troublemaker = read_file('Settings.txt')
-
-        
-#the banana was orange so I decided to not eat it after all. in the end I gave it to demitri and he threw it at kaden!
-        
-        pygame.display.update()
-        clock.tick(30)
-
-def loop():
-    global first
-    first = True
-    troublemaker = read_file('Settings.txt')
-    up,down,left,right,b,a = 0,0,0,0,0,0
-##    Start Cordinates
-    mikeX, mikeY = 700,200
-    car1X, car1Y = 100,200
-    car2X, car2Y = 300,200
-    car3X, car3Y = 500,200
-    
+def drawPlayer(dplayer):
+    mikeX,mikeY = 100,200
+    car1X,car1Y = 100,200
+    car2X,car2Y = 100,200
+    car3X,car3Y = 100,200
 
     if troublemaker == "player1.png":
         player = "face1.png"
+        x,y = car1X,car1Y
     elif troublemaker == "player2.png":
         player = "face2.png"
+        x,y = car2X,car2Y
     elif troublemaker == "player3.png":
         player = "face3.png"
+        x,y = car3X,car3Y
     elif troublemaker == "player4.png":
         player = "face4.png"
+        x,y = mikeX,mikeY
     else:
         player = "icon1.png"
 
-    time.sleep(.2)
-    
+    if dplayer == "player1.png":
+        # Mike car
+        mike = blitImg("lamboveiw1.png",mikeX,mikeY)
+        blitImg(player,mikeX+75,mikeY+40)
+    if dplayer == "player2.png":
+        # Ibrahim car
+        blitImg("car1.png",x,y)
+        blitImg(player,x+70,y+75)
+    if dplayer == "player3.png":
+        # Keith car
+        blitImg("car2.png",car2X,car2Y)
+        blitImg(player,x+75,y+48)
+    if dplayer == "player4.png":
+        # Kden car
+        blitImg("Car3.png",car3X,car3Y)
+        blitImg(player,x+72,y+55)
+    if dplayer == "player5.png":
+        # Mohamud
+        pass
 
+def game_over():
     while True:
         gameDisplay.fill(white)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+        text("Game Over!",640,100)
+        # Back
+        button("Back",725,580,300,100,red,bright_red,main)
 
+        pygame.display.update()
+        clock.tick(120)
+
+#***********************#
+#      Main Game:       #
+#     Function/Loop     #
+#***********************#
+def loop():
+    global first
+    first = True
+    crashed = False
+    troublemaker = read_file('Player1.txt')
+    troublemaker2 = read_file('Player2.txt')
+    up,down,left,right,b,a = 0,0,0,0,0,0
+    deltaX = 0
+    deltaY = 0
+##    Start Cordinates
+    mikeX,mikeY = 100,100
+    car1X,car1Y = 100,10
+    car2X,car2Y = 300,200
+    car3X,car3Y = 100,200
+
+    if troublemaker == "player1.png":
+        player = "face1.png"
+        x,y = car1X,car1Y
+    elif troublemaker == "player2.png":
+        player = "face2.png"
+        x,y = car2X,car2Y
+    elif troublemaker == "player3.png":
+        player = "face3.png"
+        x,y = car3X,car3Y
+    elif troublemaker == "player4.png":
+        player = "face4.png"
+        x,y = mikeX,mikeY
+    else:
+        player = "icon1.png"
+    def drawPlayer(dplayer):
+        if dplayer == "player1.png":
+            # Mike car
+            mike = blitImg("Lamboveiw1.png",x,y)
+            blitImg(player,x+75,y+40)
+            print("Mike")
+        if dplayer == "player2.png":
+            # Ibrahim car
+            blitImg("Car1.png",x,y)
+            blitImg(player,x+70,y+75)
+            print("Brahim")
+        if dplayer == "player3.png":
+            # Keith car
+            blitImg("Car2.png",x,y)
+            blitImg(player,x+75,y+48)
+            print("keith")
+        if dplayer == "player4.png":
+            # Kden car
+            blitImg("Car3.png",x,y)
+            blitImg(player,x+72,y+55)
+            print("kaden")
+        if dplayer == "player5.png":
+            # Mohamud
+            print("mohom")
+            pass
+    
+    time.sleep(.2)
+    
+    while True:
+        gameDisplay.fill(white)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             ## Controls
-                
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    mikeY += 10
+                    deltaY -= 10
                     up += 1
                 if event.key == pygame.K_DOWN:
-                    mikeY -= 10 
+                    deltaY += 10 
                     down += 1
                 if event.key == pygame.K_LEFT:
-                    mikeX -= 10
+                    deltaX -= 10
                     left += 1
                 if event.key == pygame.K_RIGHT:
+                    deltaX += 10
                     right += 1
                 if event.key == pygame.K_b:
                     b += 1
                 if event.key == pygame.K_a:
                     a += 1
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP:
+                    deltaY = 0
+                if event.key == pygame.K_DOWN:
+                    deltaY = 0
+                if event.key == pygame.K_LEFT:
+                    deltaX = 0
+                if event.key == pygame.K_RIGHT:
+                    deltaX = 0
+
+        if x > 495:
+            crashed = True
         if up == 2 and down == 2 and left == 2 and right == 2 and b == 1 and a == 1:
-            mikeX,mikeY = random.randint(0,1280),random.randint(0,720)
+            x,y = random.randint(0,1280),random.randint(0,720)
             win()
-##            if event.type == pygame.KEYUP:
-##                pass
-            ##if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-            ##                    x_change = (-4 - (dodged * 0.09)) * 1.2
+        ##Colision
+        if crashed == True:
+            print ("crashed")
+            game_over()
+        drawPlayer(troublemaker)
+        y +=  deltaY
+        x +=  deltaX
 
-
-
-
-
-
-            
-        # Mike car
-        mike = blitImg("Lamboveiw1.png",mikeX,mikeY)
-        blitImg(player,mikeX+75,mikeY+40)
-        # Ibrahim car
-        blitImg("Car1.png",car1X,car1Y)
-        blitImg(player,car1X+70,car1Y+75)
-        # Keith car
-        blitImg("Car2.png",car2X,car2Y)
-        blitImg(player,car2X+75,car2Y+48)
-        # Kden car
-        blitImg("Car3.png",car3X,car3Y)
-        blitImg(player,car3X+72,car3Y+55)
-        # Mohamud
+        ##Back
         button("Back",725,580,300,100,red,bright_red,main)
-        line(black,False,[(640,0),(640,1.1234e9)],10)
-
         
-            
+        line(black,False,[(640,0),(640,1.1234e9)],10)
 
         pygame.display.update()
         clock.tick(30)
