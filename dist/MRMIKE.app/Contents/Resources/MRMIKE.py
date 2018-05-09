@@ -1,7 +1,7 @@
 import pygame
 import time
 import random
-#import subprocess
+#import subprocess 
 #import os
 
 pygame.init()  
@@ -362,10 +362,10 @@ def dualPlayer():
     playerSelect("Next",True,"Troublemaker No.1")
 
 def drawPlayer(dplayer):
-    mikeX,mikeY = 100,100
-    car1X,car1Y = 600,10
-    car2X,car2Y = 300,200
-    car3X,car3Y = 500,200
+    mikeX,mikeY = 100,200
+    car1X,car1Y = 100,200
+    car2X,car2Y = 100,200
+    car3X,car3Y = 100,200
 
     if troublemaker == "player1.png":
         player = "face1.png"
@@ -384,23 +384,37 @@ def drawPlayer(dplayer):
 
     if dplayer == "player1.png":
         # Mike car
-        mike = blitImg("Lamboveiw1.png",mikeX,mikeY)
+        mike = blitImg("lamboveiw1.png",mikeX,mikeY)
         blitImg(player,mikeX+75,mikeY+40)
     if dplayer == "player2.png":
         # Ibrahim car
-        blitImg("Car1.png",x,y)
+        blitImg("car1.png",x,y)
         blitImg(player,x+70,y+75)
     if dplayer == "player3.png":
         # Keith car
-        blitImg("Car2.png",car2X,car2Y)
-        blitImg(player,car2X+75,car2Y+48)
+        blitImg("car2.png",car2X,car2Y)
+        blitImg(player,x+75,y+48)
     if dplayer == "player4.png":
         # Kden car
         blitImg("Car3.png",car3X,car3Y)
-        blitImg(player,car3X+72,car3Y+55)
+        blitImg(player,x+72,y+55)
     if dplayer == "player5.png":
         # Mohamud
         pass
+
+def game_over():
+    while True:
+        gameDisplay.fill(white)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        text("Game Over!",640,100)
+        # Back
+        button("Back",725,580,300,100,red,bright_red,main)
+
+        pygame.display.update()
+        clock.tick(120)
 
 #***********************#
 #      Main Game:       #
@@ -409,6 +423,7 @@ def drawPlayer(dplayer):
 def loop():
     global first
     first = True
+    crashed = False
     troublemaker = read_file('Player1.txt')
     troublemaker2 = read_file('Player2.txt')
     up,down,left,right,b,a = 0,0,0,0,0,0
@@ -416,9 +431,9 @@ def loop():
     deltaY = 0
 ##    Start Cordinates
     mikeX,mikeY = 100,100
-    car1X,car1Y = 600,10
+    car1X,car1Y = 100,10
     car2X,car2Y = 300,200
-    car3X,car3Y = 500,200
+    car3X,car3Y = 100,200
 
     if troublemaker == "player1.png":
         player = "face1.png"
@@ -437,34 +452,37 @@ def loop():
     def drawPlayer(dplayer):
         if dplayer == "player1.png":
             # Mike car
-            mike = blitImg("Lamboveiw1.png",mikeX,mikeY)
-            blitImg(player,mikeX+75,mikeY+40)
+            mike = blitImg("Lamboveiw1.png",x,y)
+            blitImg(player,x+75,y+40)
+            print("Mike")
         if dplayer == "player2.png":
             # Ibrahim car
             blitImg("Car1.png",x,y)
             blitImg(player,x+70,y+75)
+            print("Brahim")
         if dplayer == "player3.png":
             # Keith car
-            blitImg("Car2.png",car2X,car2Y)
-            blitImg(player,car2X+75,car2Y+48)
+            blitImg("Car2.png",x,y)
+            blitImg(player,x+75,y+48)
+            print("keith")
         if dplayer == "player4.png":
             # Kden car
-            blitImg("Car3.png",car3X,car3Y)
-            blitImg(player,car3X+72,car3Y+55)
+            blitImg("Car3.png",x,y)
+            blitImg(player,x+72,y+55)
+            print("kaden")
         if dplayer == "player5.png":
             # Mohamud
+            print("mohom")
             pass
     
     time.sleep(.2)
-
+    
     while True:
         gameDisplay.fill(white)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-            y +=  deltaY
-            x +=  deltaX
             ## Controls
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
@@ -483,7 +501,6 @@ def loop():
                     b += 1
                 if event.key == pygame.K_a:
                     a += 1
-        
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
                     deltaY = 0
@@ -494,14 +511,22 @@ def loop():
                 if event.key == pygame.K_RIGHT:
                     deltaX = 0
 
+        if x > 495:
+            crashed = True
         if up == 2 and down == 2 and left == 2 and right == 2 and b == 1 and a == 1:
             x,y = random.randint(0,1280),random.randint(0,720)
             win()
-            
+        ##Colision
+        if crashed == True:
+            print ("crashed")
+            game_over()
         drawPlayer(troublemaker)
+        y +=  deltaY
+        x +=  deltaX
 
-        # Back
+        ##Back
         button("Back",725,580,300,100,red,bright_red,main)
+        
         line(black,False,[(640,0),(640,1.1234e9)],10)
 
         pygame.display.update()
