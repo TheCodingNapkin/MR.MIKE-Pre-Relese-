@@ -312,7 +312,7 @@ def player2select(b1Message='Start'):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-
+#This is hidden
         # Title
         text('Select Your Trouble Maker!',650, 60, 90)
         
