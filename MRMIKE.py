@@ -429,6 +429,8 @@ def loop():
     up,down,left,right,b,a = 0,0,0,0,0,0
     deltaX = 0
     deltaY = 0
+    deltaMikeX = 0
+    deltaMikeY = 0
 ##    Start Cordinates
     mikeX,mikeY = 800,100
     car1X,car1Y = 100,10
