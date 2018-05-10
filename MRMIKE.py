@@ -504,25 +504,29 @@ def loop():
                     a += 1
                     deltaMikeX -= 10
                 if event.key == pygame.K_w:
-                    deltaMikeY += 10
-                if event.key == pygame.K_s:
                     deltaMikeY -= 10
+                if event.key == pygame.K_s:
+                    deltaMikeY += 10
                 if event.key == pygame.K_d:
                     deltaMikeX += 10
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
                     deltaY = 0
-                    deltaMikeX = 0
                 if event.key == pygame.K_DOWN:
                     deltaY = 0
-                    deltaMikeX = 0
                 if event.key == pygame.K_LEFT:
                     deltaX = 0
-                    deltaMikeX = 0
                 if event.key == pygame.K_RIGHT:
-                    deltaX = 0
+                    deltaX = 0    
+                if event.key == pygame.K_w:
                     deltaMikeX = 0
-
+                if event.key == pygame.K_a:
+                    deltaMikeX = 0
+                if event.key == pygame.K_s:
+                    deltaMikeX = 0
+                if event.key == pygame.K_d:
+                    deltaMikeX = 0
+                    
         if x > 495:
             crashed = True
         if up == 2 and down == 2 and left == 2 and right == 2 and b == 1 and a == 1:

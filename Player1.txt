@@ -1,1 +1,1 @@
-player3.png
+player2.png
