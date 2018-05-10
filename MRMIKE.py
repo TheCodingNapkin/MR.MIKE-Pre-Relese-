@@ -430,7 +430,7 @@ def loop():
     deltaX = 0
     deltaY = 0
 ##    Start Cordinates
-    mikeX,mikeY = 100,100
+    mikeX,mikeY = 800,100
     car1X,car1Y = 100,10
     car2X,car2Y = 300,200
     car3X,car3Y = 100,200
@@ -454,26 +454,25 @@ def loop():
             # Mike car
             mike = blitImg("Lamboveiw1.png",x,y)
             blitImg(player,x+75,y+40)
-            print("Mike")
         if dplayer == "player2.png":
             # Ibrahim car
             blitImg("Car1.png",x,y)
             blitImg(player,x+70,y+75)
-            print("Brahim")
         if dplayer == "player3.png":
             # Keith car
             blitImg("Car2.png",x,y)
             blitImg(player,x+75,y+48)
-            print("keith")
         if dplayer == "player4.png":
-            # Kden car
+            # Kaden car
             blitImg("Car3.png",x,y)
             blitImg(player,x+72,y+55)
-            print("kaden")
         if dplayer == "player5.png":
             # Mohamud
-            print("mohom")
             pass
+        # Mike car
+        mike = blitImg("Lamboveiw1.png",mikeX,mikeY)
+        blitImg("icon1.png",mikeX+75,mikeY+40)
+        
     
     time.sleep(.2)
     
@@ -501,15 +500,26 @@ def loop():
                     b += 1
                 if event.key == pygame.K_a:
                     a += 1
+                    deltaMikeX -= 10
+                if event.key == pygame.K_w:
+                    deltaMikeY += 10
+                if event.key == pygame.K_s:
+                    deltaMikeY -= 10
+                if event.key == pygame.K_d:
+                    deltaMikeX += 10
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
                     deltaY = 0
+                    deltaMikeX = 0
                 if event.key == pygame.K_DOWN:
                     deltaY = 0
+                    deltaMikeX = 0
                 if event.key == pygame.K_LEFT:
                     deltaX = 0
+                    deltaMikeX = 0
                 if event.key == pygame.K_RIGHT:
                     deltaX = 0
+                    deltaMikeX = 0
 
         if x > 495:
             crashed = True
@@ -523,6 +533,8 @@ def loop():
         drawPlayer(troublemaker)
         y +=  deltaY
         x +=  deltaX
+        mikeX += deltaMikeX
+        mikeY += deltaMikeY
 
         ##Back
         button("Back",725,580,300,100,red,bright_red,main)
